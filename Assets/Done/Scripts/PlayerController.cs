@@ -20,8 +20,27 @@ public class PlayerController : MonoBehaviour
 
 	private float nextFire;
 
+	private GameController gameController;
+
+	void Start()
+	{
+		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+		if (gameControllerObject != null)
+		{
+			gameController = gameControllerObject.GetComponent <GameController>();
+		}
+		if (gameController == null)
+		{
+			Debug.Log ("Cannot find 'GameController' script");
+		}
+	}
+
 	void Update ()
 	{
+		if (Input.GetKeyDown (KeyCode.Q)) 
+		{
+			gameController.Upgrade ();
+		}
 		if (Input.GetButton("Fire1") && Time.time > nextFire)
 		{
 			nextFire = Time.time + fireRate;

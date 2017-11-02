@@ -13,7 +13,10 @@ public class GameController : MonoBehaviour
 	public GUIText scoreText;
 	public GUIText restartText;
 	public GUIText gameOverText;
+
 	public GUIText moneyText;
+	public GUIText moneyInfoText;
+	public int upgrade;
 
 
 	private bool restart;
@@ -25,13 +28,33 @@ public class GameController : MonoBehaviour
 	{
 		score = 0;
 		money = 0; 
+		upgrade = 1;
+
 		gameOver = false;
 		restart = false;
+
+		moneyInfoText.text = "";
 		gameOverText.text = "";
 		restartText.text = "";
+
+		MoneyInfoText ();
 		UpdateScore ();
 		UpdateMoney ();
+
 		StartCoroutine (SpawnWaves ());
+	}
+
+	void FixedUpdate()
+	{
+		if (Input.GetKeyDown (KeyCode.Q)) 
+		{
+			if (money >= (upgrade * 100)) 
+			{
+				money -= (upgrade * 100);
+				upgrade++;
+			}
+		}
+		MoneyInfoText ();
 	}
 
 	void Update()
@@ -88,6 +111,21 @@ public class GameController : MonoBehaviour
 	void UpdateMoney()
 	{
 		moneyText.text = "Money: " + money;
+	}
+
+	public void Upgrade()
+	{
+		if (money >= (upgrade * 100)) 
+		{
+			money -= (upgrade * 100);
+			upgrade++;
+		}
+		MoneyInfoText ();
+	}
+
+	void MoneyInfoText()
+	{
+		moneyInfoText.text = "For an Upgrade press Q: Money needed for next upgrade: " + (upgrade * 100);
 	}
 
 	public void GameOver()
