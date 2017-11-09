@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 	private float nextFire;
 
 	private GameController gameController;
+	private Mover mover;
+
 
 	void Start()
 	{
@@ -33,19 +35,40 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Log ("Cannot find 'GameController' script");
 		}
+
+		GameObject moverObject = GameObject.FindWithTag ("Mover");
+		if (moverObject != null)
+		{
+			mover = moverObject.GetComponent <Mover>();
+		}
+		if (mover == null)
+		{
+			Debug.Log ("Cannot find 'Mover' script");
+		}
 	}
 
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.Q)) 
 		{
+			if(gameController.enoughMoney())
+			{
+				fireRate = (fireRate/2); 
+			}
 			gameController.Upgrade ();
+
+			mover.moreSpeed ();
 		}
+
 		if (Input.GetButton("Fire1") && Time.time > nextFire)
 		{
-			nextFire = Time.time + fireRate;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-			GetComponent<AudioSource>().Play();
+			if(gameController.Money() >= 1)
+			{
+				nextFire = Time.time + fireRate;
+				Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+				GetComponent<AudioSource>().Play();
+				gameController.AddMoney (-1);
+			}
 		}
 	}
 

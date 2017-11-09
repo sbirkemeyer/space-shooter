@@ -302,7 +302,7 @@ MonoBehaviour:
     zMax: 8
   shot: {fileID: 1974621966753852, guid: d35fffd0dc75506489d0861798269529, type: 2}
   shotSpawn: {fileID: 1626410038}
-  fireRate: 0.25
+  fireRate: 1
 --- !u!82 &176531558
 AudioSource:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
-		score = 0;
+		score = 10;
 		money = 0; 
 		upgrade = 1;
 
@@ -44,11 +44,16 @@ public class GameController : MonoBehaviour
 		StartCoroutine (SpawnWaves ());
 	}
 
+
+
+
+
+
 	void FixedUpdate()
 	{
 		if (Input.GetKeyDown (KeyCode.Q)) 
 		{
-			if (money >= (upgrade * 100)) 
+			if (money > (upgrade * 100)) 
 			{
 				money -= (upgrade * 100);
 				upgrade++;
@@ -56,7 +61,7 @@ public class GameController : MonoBehaviour
 		}
 		MoneyInfoText ();
 	}
-
+		
 	void Update()
 	{
 		if (restart) 
@@ -68,11 +73,17 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+
+
+
+
+
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
 		while (true)
 		{
+			AddMoney (hazardCount);
 			for (int i = 0; i < hazardCount; i++)
 			{
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
@@ -80,6 +91,7 @@ public class GameController : MonoBehaviour
 				Instantiate (hazard, spawnPosition, spawnRotation);
 				yield return new WaitForSeconds (spawnWait);
 			}
+			hazardCount++;
 			yield return new WaitForSeconds (waveWait);
 
 			if (gameOver) 
@@ -91,16 +103,30 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+
+
+
+
+
 	public void AddScore(int newScoreValue)
 	{
 		score += newScoreValue ;
 		UpdateScore ();
+		if (score <= 0) 
+		{
+			GameOver();
+		}
 	}
 
 	void UpdateScore()
 	{
 		scoreText.text = "Score: " + score;
 	}
+
+
+
+
+
 
 	public void AddMoney(int newMoneyValue)
 	{
@@ -115,7 +141,7 @@ public class GameController : MonoBehaviour
 
 	public void Upgrade()
 	{
-		if (money >= (upgrade * 100)) 
+		if (enoughMoney()) 
 		{
 			money -= (upgrade * 100);
 			upgrade++;
@@ -123,10 +149,25 @@ public class GameController : MonoBehaviour
 		MoneyInfoText ();
 	}
 
+	public bool enoughMoney()
+	{
+		return (money > (upgrade * 100));
+	}
+		
 	void MoneyInfoText()
 	{
 		moneyInfoText.text = "For an Upgrade press Q: Money needed for next upgrade: " + (upgrade * 100);
 	}
+
+	public int Money()
+	{
+		return money;
+	}
+
+
+
+
+
 
 	public void GameOver()
 	{
