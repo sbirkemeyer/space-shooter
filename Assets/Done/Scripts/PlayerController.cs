@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 	private GameController gameController;
 	private Mover mover;
 
+	public GameObject shield;
 
 	void Start()
 	{
@@ -74,6 +75,11 @@ public class PlayerController : MonoBehaviour
 
 	public void FixedUpdate()
 	{
+		if (gameController.Shield() == true) 
+		{
+			Instantiate(shield, transform.position, transform.rotation);
+		}
+
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 

@@ -9,6 +9,7 @@ public class DestroyByContact : MonoBehaviour
 	public int moneyValue;
 	private GameController gameController;
 
+
 	void Start ()
 	{
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
@@ -35,8 +36,10 @@ public class DestroyByContact : MonoBehaviour
 			Instantiate (playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver ();
 		}
+
 		gameController.AddScore (scoreValue);
 		gameController.AddMoney (moneyValue);
+		gameController.AddShieldBonus();
 		Destroy (other.gameObject);
 		Destroy (gameObject);
 	}

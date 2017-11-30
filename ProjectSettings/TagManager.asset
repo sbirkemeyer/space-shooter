@@ -7,6 +7,7 @@ TagManager:
   - Boundary
   - Asteroid
   - shot
+  - shield
   layers:
   - Default
   - TransparentFX

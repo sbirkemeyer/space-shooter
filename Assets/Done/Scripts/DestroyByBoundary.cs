@@ -22,7 +22,7 @@ public class DestroyByBoundary : MonoBehaviour
 	{
 		if(other.tag == "Asteroid")
 		{
-			gameController.AddScore (-1);
+			gameController.AddMScore (-1);
 		}
 
 		Destroy(other.gameObject);

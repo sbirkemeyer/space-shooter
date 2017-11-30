@@ -18,18 +18,24 @@ public class GameController : MonoBehaviour
 	public GUIText moneyInfoText;
 	public int upgrade;
 
-
 	private bool restart;
 	private bool gameOver;
 	private int score;
 	private int money;
+	private int scoreValue;
+
+	private int shieldBonus;
+	private bool shield;
 
 	void Start ()
 	{
 		score = 10;
+		scoreValue = 0;
 		money = 0; 
 		upgrade = 1;
+		shieldBonus = 0;
 
+		shield = false;
 		gameOver = false;
 		restart = false;
 
@@ -51,6 +57,11 @@ public class GameController : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		if (shieldBonus == 3) 
+		{
+			shield = true;
+		}
+
 		if (Input.GetKeyDown (KeyCode.Q)) 
 		{
 			if (money > (upgrade * 100)) 
@@ -83,6 +94,7 @@ public class GameController : MonoBehaviour
 		yield return new WaitForSeconds (startWait);
 		while (true)
 		{
+			scoreValue++;
 			AddMoney (hazardCount);
 			for (int i = 0; i < hazardCount; i++)
 			{
@@ -111,6 +123,16 @@ public class GameController : MonoBehaviour
 	public void AddScore(int newScoreValue)
 	{
 		score += newScoreValue ;
+		UpdateScore ();
+		if (score <= 0) 
+		{
+			GameOver();
+		}
+	}
+
+	public void AddMScore(int newScoreValue)
+	{
+		score += (newScoreValue*scoreValue) ;
 		UpdateScore ();
 		if (score <= 0) 
 		{
@@ -164,6 +186,19 @@ public class GameController : MonoBehaviour
 		return money;
 	}
 
+
+
+
+
+	public void AddShieldBonus()
+	{
+		shieldBonus++;
+	}
+
+	public bool Shield()
+	{
+		return shield;
+	}
 
 
 
