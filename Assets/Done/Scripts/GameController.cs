@@ -57,9 +57,10 @@ public class GameController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (shieldBonus == 3) 
+		if (shieldBonus == 25) 
 		{
 			shield = true;
+			shieldBonus = 0;
 		}
 
 		if (Input.GetKeyDown (KeyCode.Q)) 
@@ -198,6 +199,10 @@ public class GameController : MonoBehaviour
 	public bool Shield()
 	{
 		return shield;
+	}
+	public void SetShield()
+	{
+		shield = false;
 	}
 
 

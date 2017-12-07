@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
 	public GameObject shot;
 	public Transform shotSpawn;
-	public float fireRate;
+	private float fireRate;
 
 	private float nextFire;
 
@@ -24,9 +24,12 @@ public class PlayerController : MonoBehaviour
 	private Mover mover;
 
 	public GameObject shield;
+	public float shieldlvl;
 
 	void Start()
 	{
+		fireRate = 1;
+
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
 		if (gameControllerObject != null)
 		{
@@ -37,10 +40,10 @@ public class PlayerController : MonoBehaviour
 			Debug.Log ("Cannot find 'GameController' script");
 		}
 
-		GameObject moverObject = GameObject.FindWithTag ("Mover");
-		if (moverObject != null)
+		GameObject AsteroidObject = GameObject.FindWithTag ("Asteroid");
+		if (AsteroidObject != null)
 		{
-			mover = moverObject.GetComponent <Mover>();
+			mover = AsteroidObject.GetComponent <Mover>();
 		}
 		if (mover == null)
 		{
@@ -50,19 +53,17 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Q)) 
-		{
-			if(gameController.enoughMoney())
-			{
-				fireRate = (fireRate/2); 
-			}
-			gameController.Upgrade ();
-
-			mover.moreSpeed ();
-		}
-
 		if (Input.GetButton("Fire1") && Time.time > nextFire)
 		{
+			if (Input.GetKeyDown (KeyCode.Q)) 
+			{
+				if(gameController.enoughMoney())
+				{
+					fireRate = (fireRate/2); 
+				}
+				gameController.Upgrade ();
+			}
+
 			if(gameController.Money() >= 1)
 			{
 				nextFire = Time.time + fireRate;
@@ -77,7 +78,9 @@ public class PlayerController : MonoBehaviour
 	{
 		if (gameController.Shield() == true) 
 		{
-			Instantiate(shield, transform.position, transform.rotation);
+			shield.SetActive (true);
+			gameController.SetShield ();
+			shieldlvl++;
 		}
 
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -97,5 +100,14 @@ public class PlayerController : MonoBehaviour
 		);
 
 		rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
+	}
+
+	public void SetShield()
+	{
+		shieldlvl--;
+		if (shieldlvl == 0) 
+		{
+			shield.SetActive (false);
+		}
 	}
 }

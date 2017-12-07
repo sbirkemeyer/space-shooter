@@ -8,7 +8,7 @@ public class DestroyByContact : MonoBehaviour
 	public int scoreValue;
 	public int moneyValue;
 	private GameController gameController;
-
+	private PlayerController player;
 
 	void Start ()
 	{
@@ -20,6 +20,16 @@ public class DestroyByContact : MonoBehaviour
 		if (gameController == null)
 		{
 			Debug.Log ("Cannot find 'GameController' script");
+		}
+
+		GameObject playerObject = GameObject.FindWithTag ("Player");
+		if (playerObject != null)
+		{
+			player = playerObject.GetComponent <PlayerController>();
+		}
+		if (player == null)
+		{
+			Debug.Log ("Cannot find 'PlayerController' script");
 		}
 	}
 
@@ -40,7 +50,17 @@ public class DestroyByContact : MonoBehaviour
 		gameController.AddScore (scoreValue);
 		gameController.AddMoney (moneyValue);
 		gameController.AddShieldBonus();
-		Destroy (other.gameObject);
+
+		if (other.tag == "shield") 
+		{
+			Destroy (gameObject);
+			player.SetShield ();
+		}
+		else
+		{
+			Destroy (other.gameObject);
+		}
 		Destroy (gameObject);
+
 	}
 }

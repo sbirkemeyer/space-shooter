@@ -302,8 +302,8 @@ MonoBehaviour:
     zMax: 8
   shot: {fileID: 1974621966753852, guid: d35fffd0dc75506489d0861798269529, type: 2}
   shotSpawn: {fileID: 1626410038}
-  fireRate: 1
-  shield: {fileID: 0}
+  shield: {fileID: 1202300161}
+  shieldlvl: 0
 --- !u!82 &176531558
 AudioSource:
   m_ObjectHideFlags: 0
@@ -547,6 +547,52 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &675039259
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 176531552}
+    m_Modifications:
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448331858413632, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1274015202691852, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b48649c36dd3865429e163f5bbbd8fc8, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &854779621
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,34 +714,11 @@ Transform:
   m_Father: {fileID: 1457011899}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1346581004
+--- !u!1 &1202300161 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1346581005}
-  m_Layer: 0
-  m_Name: Shield Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1346581005
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1346581004}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 176531552}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_PrefabParentObject: {fileID: 1274015202691852, guid: b48649c36dd3865429e163f5bbbd8fc8,
+    type: 2}
+  m_PrefabInternal: {fileID: 675039259}
 --- !u!1 &1417294347
 GameObject:
   m_ObjectHideFlags: 0
